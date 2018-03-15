@@ -1,0 +1,79 @@
+{% extends 'layout.html' %}
+
+{% block title %}Surrounded{% endblock %}
+
+{% block body %}
+  <div id="confetti"></div>
+  <div id="homeDiv" class="container">
+    <div class="row">
+      <p id="paragraph" class="flow-text justify col s12 l4">
+        Welcome to Surrounded! This is a strategy game, where you can play against a trained AI that uses 
+        a neural network, and was made using TensorFlow. For more info and instructions on how to play, 
+        click Info in the menu bar.
+      </p>
+      <div id="gameBoard">
+        <div id="column1" class="column">
+          <div id="c1" class="tile empty"></div>
+          <div id="c2" class="tile ally"></div>
+          <div id="c3" class="tile empty"></div>
+          <div id="c4" class="tile enemy"></div>
+          <div id="c5" class="tile empty"></div>
+          <div id="c6" class="tile empty"></div>
+        </div>
+    
+        <div id="column2" class="column">
+          <div id="c7" class="tile enemy"></div>
+          <div id="c8" class="tile empty"></div>
+          <div id="c9" class="tile empty"></div>
+          <div id="c10" class="tile empty"></div>
+          <div id="c11" class="tile ally"></div>
+          <div id="c12" class="tile empty"></div>
+        </div>
+    
+        <div id="column3" class="column">
+          <div id="c13" class="tile empty"></div>
+          <div id="c14" class="tile empty"></div>
+          <div id="c15" class="tile ally"></div>
+          <div id="c16" class="tile empty"></div>
+          <div id="c17" class="tile empty"></div>
+          <div id="c18" class="tile empty"></div>
+        </div>
+
+        <div id="column4" class="column">
+          <div id="c19" class="tile empty"></div>
+          <div id="c20" class="tile enemy"></div>
+          <div id="c21" class="tile empty"></div>
+          <div id="c22" class="tile enemy"></div>
+          <div id="c23" class="tile empty"></div>
+          <div id="c24" class="tile ally"></div>
+        </div>
+
+        <div id="column5" class="column">
+          <div id="c25" class="tile empty"></div>
+          <div id="c26" class="tile empty"></div>
+          <div id="c27" class="tile ally"></div>
+          <div id="c28" class="tile empty"></div>
+          <div id="c29" class="tile enemy"></div>
+          <div id="c30" class="tile empty"></div>
+        </div>
+
+        <div id="column6" class="column">
+          <div id="c31" class="tile ally"></div>
+          <div id="c32" class="tile empty"></div>
+          <div id="c33" class="tile empty"></div>
+          <div id="c34" class="tile enemy"></div>
+          <div id="c35" class="tile empty"></div>
+          <div id="c36" class="tile empty"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block javascript %}
+<script>
+  $('.navbar-fixed nav .nav-wrapper ul li:first-child').addClass('active');
+</script>
+<script src="js/confetti.js"></script>
+<script src="js/surrounded.js"></script>
+{% endblock %}
