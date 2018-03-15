@@ -1,0 +1,24 @@
+{% extends 'layout.html' %}
+
+{% block title %}Surrounded | Info{% endblock %}
+
+{% block body %}
+  <div class="container">
+    <div class="row">
+      <h3 class="col s12">Info</h3>
+    </div>
+    <div class="row">
+      <p class="col s10 flow-text justify">
+        Here, you can find instructions to play the strategy game of surrounded. What is so special about 
+        this game? Well, you can play against an AI that uses a Neural Network, made using Google's TensorFlow, 
+        and try to win!
+      </p>
+    </div>
+  </div>
+{% endblock %}
+
+{% block javascript %}
+<script>
+  $('.navbar-fixed nav .nav-wrapper ul li:last-child').addClass('active');
+</script>
+{% endblock %}
