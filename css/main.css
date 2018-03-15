@@ -1,0 +1,134 @@
+/*
+  Common stuff in all pages
+*/
+
+#loading {
+  height: 100vh;
+  width: 100%;
+}
+
+#loading div {
+  margin: 0 auto;
+}
+
+#loggedStatus {
+  position: absolute;
+  top: 0em;
+  right: 10px;
+}
+
+#profilePic {
+  border: 1px solid black;
+  height: 3em;
+  margin: 0 2vh;
+}
+
+#division {
+  padding: 1px;
+  min-height: 50vh;
+}
+
+#cubetasticLogo {
+  width: 2em;
+  margin-bottom: -0.5em;
+}
+
+.justify {
+  text-align: justify;
+}
+
+/*
+  Game
+*/
+
+#confetti {
+  position: absolute;
+}
+
+#homeDiv {
+  margin: 0 10px;
+  width: 100%;
+}
+
+#gameBoard {
+  border: 2px solid #ffc000;
+  border-radius: 5px;
+  height: 85vh;
+  width: 85vh;
+  margin-left: 10vw;
+  overflow: hidden;
+}
+
+.column {
+  height: 85vh;
+  width: 85vh;
+}
+
+#column2 {
+  margin-top: -85vh;
+  margin-left: 16.6666666667%;
+}
+
+#column3 {
+  margin-top: -85vh;
+  margin-left: 33.3333333333%;
+}
+
+#column4 {
+  margin-top: -85vh;
+  margin-left: 50%;
+}
+
+#column5 {
+  margin-top: -85vh;
+  margin-left: 66.6666666667%;
+}
+
+#column6 {
+  margin-top: -85vh;
+  margin-left: 83.3333333333%;
+}
+
+.tile {
+  border: 1px solid #ffc000;
+  height: 16.6666666667%;
+  width: 16.6666666667%;
+}
+
+.tile.empty {
+  background-color: #a8a8a8;
+}
+
+.tile.ally {
+  background-color: navy;
+  cursor: pointer;
+}
+
+.tile.enemy {
+  background-color: red;
+}
+
+.tile.selected {
+  filter: brightness(65%);
+}
+
+/*
+  Sign up and Sign in Forms
+*/
+
+#formHeading {
+  border-radius: 7px 7px 0 0;
+  font-size: 250%;
+}
+
+#signUp, #signIn {
+  border-radius: 0 0 7px 7px;
+  margin-top: -1.5em;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  transition: background-color 5000s ease-in-out 0s;
+}
