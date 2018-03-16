@@ -3,20 +3,18 @@
 Welcome to the strategy game of surrounded! What is so special about this game? Well, you can play against an AI that uses a 
 Neural Network, made using Google's TensorFlow, and try to win!
 
-```diff
-- Note: The Neural Network is still in progress. So, right now, the opponent only makes random moves. However, we are working on the AI.
-```
+Note: The Neural Network is still in progress. So, right now, the opponent only makes random moves. However, we are working on the AI.
 
 ### How to Play
 The objective of the game is to SURROUND an enemy tile.
+
 ![Ally Tile](https://surrounded.herokuapp.com/images/ally_tile.png)
-
 The blue tiles are the tiles which you can control, and are called Ally Tiles.
+
 ![Enemy Tile](https://surrounded.herokuapp.com/images/enemy_tile.png)
-
 The red tiles belong to your opponent, and are called Enemy Tiles.
-![Empty Tile](https://surrounded.herokuapp.com/images/empty_tile.png)
 
+![Empty Tile](https://surrounded.herokuapp.com/images/empty_tile.png)
 The ally and enemy tiles can move to Empty Tiles, which are light grey in colour.
 
 To move an ally tile, you need to first click on it, and then click on the empty tile where you want 
