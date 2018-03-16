@@ -1,4 +1,4 @@
-function startConfetti() {
+function startConfetti(winnerColour) {
   var canvas = document.getElementById('confetti');
   
   canvas.width = $(window).innerWidth() - 20;
@@ -11,7 +11,7 @@ function startConfetti() {
   
   function randomColor () {
     var colors = ['#f00', '#0f0', '#00f', '#0ff', '#f0f', '#ff0'];
-    return colors[Math.floor(Math.random() * colors.length)];
+    return winnerColour;
   }
   
   function update() {

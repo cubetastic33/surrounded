@@ -97,14 +97,15 @@ function moveAllyTile(fromTile, toTile) {
     }
   });
   if (allyWins == true) {
-    startConfetti();
+    startConfetti('#0D47A1');
     $('#paragraph').html('You Win!');
-    $('#paragraph').addClass('green-text');
+    $('#paragraph').addClass('blue-text text-darken-4');
     $('#paragraph').addClass('valign-wrapper');
     $('#paragraph').css({'font-size': '500%', 'height': '65vh'});
     $('html, body').animate({scrollTop: 0}, 'slow');
   } else if (enemyWins == true) {
-    $('#paragraph').html('You Lose!');
+    startConfetti('#F44336');
+    $('#paragraph').html('&nbsp;&nbsp;&nbsp;I Win!');
     $('#paragraph').addClass('red-text');
     $('#paragraph').addClass('valign-wrapper');
     $('#paragraph').css({'font-size': '500%', 'height': '65vh'});
@@ -148,15 +149,16 @@ function moveEnemyTile(moveFrom, moveTo) {
     }
   });
   if (enemyWins == true) {
-    $('#paragraph').html('You Lose!');
+    startConfetti('#F44336');
+    $('#paragraph').html('&nbsp;&nbsp;&nbsp;I Win!');
     $('#paragraph').addClass('red-text');
     $('#paragraph').addClass('valign-wrapper');
     $('#paragraph').css({'font-size': '500%', 'height': '65vh'});
     $('html, body').animate({scrollTop: 0}, 'slow');
   } else if (allyWins == true) {
-    startConfetti();
+    startConfetti('#0D47A1');
     $('#paragraph').html('You Win!');
-    $('#paragraph').addClass('green-text');
+    $('#paragraph').addClass('blue-text text-darken-4');
     $('#paragraph').addClass('valign-wrapper');
     $('#paragraph').css({'font-size': '500%', 'height': '65vh'});
     $('html, body').animate({scrollTop: 0}, 'slow');
