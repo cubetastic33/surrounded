@@ -8,15 +8,15 @@ Note: The Neural Network is still in progress. So, right now, the opponent only 
 ### How to Play
 The objective of the game is to SURROUND an enemy tile.
 
-                    ![Ally Tile](https://surrounded.herokuapp.com/images/ally_tile.png)
+   \                ![Ally Tile](https://surrounded.herokuapp.com/images/ally_tile.png)
 
 The blue tiles are the tiles which you can control, and are called Ally Tiles.
 
-                    ![Enemy Tile](https://surrounded.herokuapp.com/images/enemy_tile.png)
+   \                ![Enemy Tile](https://surrounded.herokuapp.com/images/enemy_tile.png)
 
 The red tiles belong to your opponent, and are called Enemy Tiles.
 
-                    ![Empty Tile](https://surrounded.herokuapp.com/images/empty_tile.png)
+   \                ![Empty Tile](https://surrounded.herokuapp.com/images/empty_tile.png)
 
 The ally and enemy tiles can move to Empty Tiles, which are light grey in colour.
 
