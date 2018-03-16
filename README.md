@@ -36,3 +36,11 @@ and in the other side by an Enemy Tile. Remember, to start a new game, you can c
 
 
 So now that you know the game, why not [play](https://surrounded.herokuapp.com)?
+
+### How the game works
+
+Note: This section is mostly for developers.
+
+The UI of the website is based on Google's Material Design, and materialize css has been used to
+implement some of the features. The database used for this website is Google's Firebase. The neural 
+network has been done using Google's TensorFlow.
