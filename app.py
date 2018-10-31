@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, send_from_directory, jsonify
-from surrounded import enemy_move
+from surrounded import enemy_move, create_choose_enemy_tile_dataset
 
 app = Flask(__name__, static_url_path='/')
 
@@ -15,15 +15,7 @@ def index_html():
 def info_html():
   return render_template('info.html')
 
-@app.route('/signin.html')
-def signin_html():
-  return render_template('signin.html')
-
-@app.route('/signup.html')
-def signup_html():
-  return render_template('signup.html')
-
-@app.route('/enemyMove', methods=['GET', 'POST'])
+@app.route('/enemyMove', methods=['GET'])
 def enemyMove():
   ally_positions = request.args.getlist('ally_positions[]')
   enemy_positions = request.args.getlist('enemy_positions[]')
