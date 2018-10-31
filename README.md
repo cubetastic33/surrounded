@@ -3,7 +3,7 @@
 Welcome to the strategy game of surrounded! What is so special about this game? Well, you can play against an AI that uses a 
 Neural Network, made using Google's TensorFlow, and try to win!
 
-Note: The Neural Network is still in progress. So, right now, the opponent only makes random moves. However, we are working on the AI.
+Note: There was initially an idea to add a neural network as the opponent, but the idea has been cancelled. Right now, it only uses random moves for the opponent.
 
 ### How to Play
 The objective of the game is to SURROUND an enemy tile.
@@ -41,6 +41,5 @@ So now that you know the game, why not [play](https://surrounded.herokuapp.com)?
 
 Note: This section is mostly for developers.
 
-The UI of the website is based on Google's Material Design, and materialize css has been used to
-implement some of the features. The database used for this website is Google's Firebase. The neural 
-network has been done using Google's TensorFlow.
+The UI of the website is based on Material Design, and materialize css has been used to
+implement some of the features. The database used for this website is Firebase.
