@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
   <link rel="stylesheet" href="css/main.css">
   <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googvaragmanager.com/gtag/js?id=UA-112091281-4"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-112091281-4"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
@@ -46,7 +46,6 @@
         <div id="loggedStatus"></div>
       </nav>
     </header>
-    <canvas id="confetti"></canvas>
     {% block body %}
     {% endblock %}
     <footer class="page-footer red">
@@ -54,10 +53,10 @@
         <div class="row">
           <div class="col l6 s12">
             <h5 class="white-text">Surrounded</h5>
-            <p>Created by cubetastic</br>
-            This game was created to make a machine learning AI.<br>
-            For help or support contact me:</br>
-            cubetastic33@gmail.com
+            <!--<p>
+              Created by cubetastic</br>
+              For help or support contact me:</br>
+              cubetastic33@gmail.com
             </p>
           </div>
           <div class="col l4 offset-l2 hide-on-small-only">
@@ -65,30 +64,33 @@
             <ul>
               <li><a href="https://cubetastic.herokuapp.com"><img src="images/cubetastic_logo.png" id="cubetasticLogo" alt="cubetastic logo">cubetastic</a></li>
             </ul>
-            <a class="github-button" href="https://github.com/cubetastic33" data-size="large" data-show-count="true" aria-label="Follow @cubetastic33 on GitHub">Follow @cubetastic33</a><br>
-            <a class="github-button" href="https://github.com/cubetastic33/surrounded" data-size="large" data-show-count="true" aria-label="Star cubetastic33/surrounded on GitHub">Star</a>
+            <a class="github-button" href="https://github.com/cubetastic33" data-size="large" data-show-count="true" aria-label="Follow @cubetastic33 on GitHub">Follow @cubetastic33</a><br>-->
+            <a class="github-button" href="https://github.com33/surrounded" data-size="large" data-show-count="true" aria-label="Star cubetastic33/surrounded on GitHub">Star</a>
           </div>
         </div>
       </div>
       <div class="footer-copyright" id="FooterBase">
         <div class="container">
-          © 2018 Copyright Cubetastic | CSS Library used: <a href="http://materializecss.com/">Materialize CSS</a>
+          © 2018 Copyright <!--Cubetastic--> | CSS Library used: <a href="http://materializecss.com/">Materialize CSS</a>
         </div>
       </div>
     </footer>
   </div>
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script>
-  function hideloader() {
+<script>  
+  $(document).ready(function() {
     $('#loading').hide();
     $('#content').show();
-  }
+    if ($('select').length) {
+      $('select').material_select();
+    }
+    if ($('.modal').length) {
+      $('.modal').modal();
+    }
+});
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
-<script src="https://www.gstatic.com/firebasejs/4.11.0/firebase.js"></script>
-<script src="js/main.js"></script>
-<script src="js/loggedStatus.js"></script>
 {% block javascript %}
 {% endblock %}
 </html>
