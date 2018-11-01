@@ -1,148 +1,166 @@
-// Initialize Firebase
-var config = {
-  apiKey: "apiKey",
-  authDomain: "authDomain",
-  databaseURL: "databaseURL",
-  projectId: "projectId",
-  storageBucket: "storageBucket",
-  messagingSenderId: "messagingSenderId"
-};
-firebase.initializeApp(config);
+allyTurn = true;
+allyWins = false;
+enemyWins = false;
 
-$(document).ready(function() {
-  if ($('select').length) {
-    $('select').material_select();
-  }
-  if ($('.modal').length) {
-    $('.modal').modal();
-  }
-});
+allyPositions = [2, 11, 15, 24, 27, 31];
+enemyPositions = [4, 7, 20, 22, 29, 34];
 
-$('#signUp').submit(function(e) {
-  e.preventDefault();
-  signUpUser();
-});
+moveableTiles = {
+  c1: [7, 2],
+  c2: [1, 8, 3],
+  c3: [2, 9, 4],
+  c4: [3, 10, 5],
+  c5: [4, 11, 6],
+  c6: [5, 12],
+  c7: [13, 8, 1],
+  c8: [7, 14, 9, 2],
+  c9: [8, 15, 10, 3],
+  c10: [9, 16, 11, 4],
+  c11: [10, 17, 12, 5],
+  c12: [11, 18, 6],
+  c13: [19, 14, 7],
+  c14: [13, 20, 15, 8],
+  c15: [14, 21, 16, 9],
+  c16: [15, 22, 17, 10],
+  c17: [16, 23, 18, 11],
+  c18: [17, 24, 12],
+  c19: [25, 20, 13],
+  c20: [19, 26, 21, 14],
+  c21: [20, 27, 22, 15],
+  c22: [21, 28, 23, 16],
+  c23: [22, 29, 24, 17],
+  c24: [23, 30, 18],
+  c25: [31, 26, 19],
+  c26: [25, 32, 27, 20],
+  c27: [26, 33, 28, 21],
+  c28: [27, 34, 29, 22],
+  c29: [28, 35, 30, 23],
+  c30: [29, 36, 24],
+  c31: [32, 25],
+  c32: [31, 33, 26],
+  c33: [32, 34, 27],
+  c34: [33, 35, 28],
+  c35: [34, 36, 29],
+  c36: [35, 30]
+}
 
-$('#signIn').submit(function(e) {
-  e.preventDefault();
-  signInUser();
-});
-
-var db = firebase.database();
-var storage = firebase.storage();
-
-$('#username').keyup(function() {
-  if ($('#username').val()) {
-    $('#username').attr('class', 'valid');
-    $('#usernameLabel').attr('data-success', $('#username').val() + ' is available.');
-    var ref = firebase.database().ref('users').orderByChild('username').equalTo($('#username').val());
-    ref.on('child_added', function(snapshot) {
-      var usersdata = snapshot.val();
-      if (usersdata.username == $('#username').val()) {
-        $('#username').attr('class', 'invalid');
-        $('#usernameLabel').attr('data-error', usersdata.username+' already exists. Choose a different name!');
-      } else {
-        $('#username').attr('class', 'valid');
-        $('#usernameLabel').attr('data-success', $('#username').val() + ' is available.');
-      }
-    });
-  } else {
-    $('#username').attr('class', 'validate');
-  }
-});
-
-$('#confPassword').keyup(function() {
-  if ($('#confPassword').val() == $('#password').val()) {
-    $('#confPassword').attr('class', 'valid');
-  } else {
-    $('#confPassword').attr('class', 'invalid');
+$('.tile').click(function() {
+  if ($(this).hasClass('ally') == true) {
+    selectTile($(this).attr('id'));
   }
 });
 
-function signUpUser() {
-  //Get values
-  var username = $('#username').val();
-  var email = $('#email').val();
-  var password = $('#password').val();
-  var gender = $('input[name=gender]:checked').val();
-  if (($('#usernameLabel').attr('class') != 'invalid') && ($('#confPassword').attr('class') == 'valid') && (gender)) {
-    Materialize.toast('Please wait...');
-    firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
-      // Handle Errors here.
-      var errorCode = error.code;
-      var errorMessage = error.message;
-      if (errorCode == 'auth/weak-password') {
-        $('#password').attr('class', 'invalid');
-        $('#passwordLabel').attr('data-error', 'The password is too weak.');
-      }
-      else {
-        Materialize.toast(errorMessage, 10000);
-      }
-    });
-
-    firebase.auth().onAuthStateChanged(function(user) {
-      if (user) {
-        var uid = user.uid;
-        db.ref('users/'+uid).child('email').set(email);
-        db.ref('users/'+uid).child('gender').set(gender);
-        db.ref('users/'+uid).child('profilePic').set('/images/defaultProfilePic.png');
-        db.ref('users/'+uid).child('username').set(username);
-        user.updateProfile({
-          displayName: username,
-          photoURL: "/images/defaultProfilePic.png"
-        });
-        user.sendEmailVerification().then(function() {
-          // Email sent.
-          alert("Verification email has been sent.");
-          window.location.href="index.html";
-        }).catch(function(error) {
-          // An error happened.
-          Materialize.toast(errorMessage, 10000);
-        });
-      }
-    });
-  } else if ($('#confPassword').attr('class') != 'valid') {
-    Materialize.toast('The two passwords don\'t match!');
-    $('#confPasswordLabel').attr('data-error', 'The two passwords don\'t match!');
-  } else if (!gender) {
-    Materialize.toast('Please select your gender!');
+function selectTile(tileId) {
+  if ((allyTurn == true) && ($('#'+tileId).hasClass('selected') == false) && (!$('.selected').length)) {
+    $('#'+tileId).addClass('selected');
+  } else if (allyTurn == true) {
+    $('#'+tileId).removeClass('selected');
   }
 }
 
-function signInUser() {
-  //Get values
-  var username = $("#username").val();
-  var password = $("#password").val();
-  Materialize.toast('Please wait...');
-
-  var usersRef = db.ref('users').orderByChild('username').equalTo(username);
-  usersRef.once("child_added", function(snapshot) {
-    email = snapshot.val().email;
-    firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
-      // Handle Errors here.
-      var errorCode = error.code;
-      var errorMessage = error.message;
-      Materialize.toast(errorMessage);
-    });
-    firebase.auth().onAuthStateChanged(function(user) {
-      if (user) {
-        // User is signed in.
-        window.location.href="index.html";
-      }
-    });
-  }, function (errorObject) {
-    console.log("The read failed: " + errorObject.code);
-  });
-}
-
-$('#forgotPassword').click(function() {
-  firebase.auth().sendPasswordResetEmail(prompt('Enter your email address')).then(function() {
-    console.log('Sent password reset email.');
-  }).catch(function(error) {
-    console.log('Error: ', error);
-  });
+$('.tile').click(function() {
+  if ($(this).hasClass('empty')) {
+    checkValidity($(this).attr('id'));
+  }
 });
 
-function signOutUser() {
-  firebase.auth().signOut().then(function() {}).catch(function(error) {console.log(error);});
+function checkValidity(tileId) {
+  if ($('.selected').length) {
+    fromTile = $('.selected').attr('id');
+    toTile = $('#'+tileId).attr('id').substr(1);
+    if (moveableTiles[fromTile].includes(parseInt(toTile)) == true) {
+      moveAllyTile(fromTile, toTile);
+    }
+  }
+}
+
+function moveAllyTile(fromTile, toTile) {
+  $('#'+fromTile).attr('class', 'tile empty');
+  allyPositions[allyPositions.indexOf(parseInt(fromTile.substr(1)))] = parseInt(toTile);
+  $('#c'+toTile).attr('class', 'tile ally');
+  allyTurn = false;
+  $('.tile').each(function() {
+    counter = 0;
+    if ($(this).hasClass('empty') == false) {
+      surroundingLocations = moveableTiles[$(this).attr('id')];
+      for (var i = 0; i < surroundingLocations.length; i++) {
+        if ($('#c' + surroundingLocations[i]).hasClass('empty') == false) {
+          counter++;
+        }
+      }
+      if ((counter == surroundingLocations.length) && ($(this).hasClass('enemy') == true)) {
+        allyWins = true;
+      } else if ((counter == surroundingLocations.length) && ($(this).hasClass('ally') == true)) {
+        enemyWins = true;
+      }
+    }
+  });
+  if (allyWins == true) {
+    startConfetti('#0D47A1');
+    $('#paragraph').html('You Win!');
+    $('#paragraph').addClass('blue-text text-darken-4');
+    $('#paragraph').addClass('valign-wrapper');
+    $('#paragraph').css({'font-size': '500%', 'height': '65vh'});
+    $('html, body').animate({scrollTop: 0}, 'slow');
+  } else if (enemyWins == true) {
+    startConfetti('#F44336');
+    $('#paragraph').html('&nbsp;&nbsp;&nbsp;I Win!');
+    $('#paragraph').addClass('red-text');
+    $('#paragraph').addClass('valign-wrapper');
+    $('#paragraph').css({'font-size': '500%', 'height': '65vh'});
+    $('html, body').animate({scrollTop: 0}, 'slow');
+  } else {
+    $.ajax({
+      type: 'GET',
+      url: '/enemyMove',
+      data: {
+        ally_positions: allyPositions,
+        enemy_positions: enemyPositions
+      },
+      success: function(result) {
+        console.log(result.enemyMove);
+        moveEnemyTile(result.enemyMove[0], result.enemyMove[1]);
+      }
+    });
+  }
+}
+
+function moveEnemyTile(moveFrom, moveTo) {
+  //Move the enemy tile
+  $('#c'+moveFrom).attr('class', 'tile empty');
+  enemyPositions[enemyPositions.indexOf(parseInt(moveFrom))] = parseInt(moveTo);
+  $('#c'+moveTo).attr('class', 'tile enemy');
+  $('.tile').each(function() {
+    counter = 0;
+    if ($(this).hasClass('empty') == false) {
+      surroundingLocations = moveableTiles[$(this).attr('id')];
+      for (var i = 0; i < surroundingLocations.length; i++) {
+        if ($('#c' + surroundingLocations[i]).hasClass('empty') == false) {
+          counter++;
+        }
+      }
+      if ((counter == surroundingLocations.length) && ($(this).hasClass('ally') == true)) {
+        enemyWins = true;
+      } else if ((counter == surroundingLocations.length) && ($(this).hasClass('enemy') == true)) {
+        allyWins = true;
+      }
+    }
+  });
+  if (enemyWins == true) {
+    startConfetti('#F44336');
+    $('#paragraph').html('&nbsp;&nbsp;&nbsp;I Win!');
+    $('#paragraph').addClass('red-text');
+    $('#paragraph').addClass('valign-wrapper');
+    $('#paragraph').css({'font-size': '500%', 'height': '65vh'});
+    $('html, body').animate({scrollTop: 0}, 'slow');
+  } else if (allyWins == true) {
+    startConfetti('#0D47A1');
+    $('#paragraph').html('You Win!');
+    $('#paragraph').addClass('blue-text text-darken-4');
+    $('#paragraph').addClass('valign-wrapper');
+    $('#paragraph').css({'font-size': '500%', 'height': '65vh'});
+    $('html, body').animate({scrollTop: 0}, 'slow');
+  } else {
+    allyTurn = true;
+  }
 }
